@@ -5,6 +5,11 @@ function requadrantize()
 % cont... & 2)the corresponding FoundVideoFiles.mat file. 
 % Quadrantized Videos will save under subfolder 'MUXED' within the BB## "Current Experiment" subfolder; 
 % Other Generated Outputs: 1) black_frame.jpg 2)black_frame.mp4 
+
+%% 3.17.23 Josh- Trying to quadrantize on Scatha using videos on Overseer\F:\Videos\BB##\PreviousExperiments\Experiment05\Cohort01
+
+directoryAfterOverseerFBBNumber = '';
+
 %% loading videos
 
 load('FoundVideoFiles.mat', 'all_videos_output_data')
@@ -14,7 +19,7 @@ num_boxes=size(bbIDs,2);
 for k=1:num_boxes
 	box_number=all_videos_output_data{1,k}.curr_bbID;
 	box_folder=sprintf('BB%s',box_number);
-	formatSpec='%s\\CurrentExperiment';
+	formatSpec=['%s/\PreviousExperiments', ];
 	box_folder=sprintf(formatSpec,box_folder);
 	addpath(box_folder);
 	vid_data=all_videos_output_data{1,k}.videoFilesData;
