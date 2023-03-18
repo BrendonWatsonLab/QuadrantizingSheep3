@@ -6,10 +6,12 @@ function requadrantize()
 % Quadrantized Videos will save under subfolder 'MUXED' within the BB## "Current Experiment" subfolder; 
 % Other Generated Outputs: 1) black_frame.jpg 2)black_frame.mp4 
 
-%% 3.17.23 Josh- Trying to quadrantize on Scatha using videos on Overseer\F:\Videos\BB##\PreviousExperiments\Experiment05\Cohort01
-
-directoryAfterOverseerFBBNumber = '';
-
+%% 3.17.23 Josh- Trying to quadrantize on Scatha using videos from Overseer\F:\Videos\BB##\Previous Experiments\Experiment05\Cohort01
+experimentToQuadrantize = '05';
+cohortToQuadrantize = '01';
+pathToOverseerFBBFolders = '/media/OverseerF:/Videos';
+%% Which Experiment and Cohort to analyze. 
+experimentAndCohortToAnalyze = sprintf('Experiment%s/Cohort%s', experimentToQuadrantize, cohortToQuadrantize);
 %% loading videos
 
 load('FoundVideoFiles.mat', 'all_videos_output_data')
@@ -19,9 +21,9 @@ num_boxes=size(bbIDs,2);
 for k=1:num_boxes
 	box_number=all_videos_output_data{1,k}.curr_bbID;
 	box_folder=sprintf('BB%s',box_number);
-	formatSpec=['%s/\PreviousExperiments', ];
+	formatSpec='%s\\PreviousExperiments';
 	box_folder=sprintf(formatSpec,box_folder);
-	addpath(box_folder);
+	addpath(pathTo, box_folder);
 	vid_data=all_videos_output_data{1,k}.videoFilesData;
 	vid_data=struct2table(vid_data);
 	% vid_dir=vid_data.folder{1,1}
