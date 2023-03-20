@@ -1,4 +1,4 @@
-function requadrantize()
+function requadrantize(experimentToQuadrantize,cohortToQuadrantize, pathToBBFolders)
 % Author: Priya Vijayakumar, vijayak@umich.edu
 % Last Update: 12/6/22 3:30PM EST
 %READ: requadrantize.m needs to be in the SAME folder as 1) BB## folder (containing "Current Experiment" folder with videos to analyze)...
@@ -7,15 +7,23 @@ function requadrantize()
 % Other Generated Outputs: 1) black_frame.jpg 2)black_frame.mp4 
 
 %% 3.17.23 Josh- Trying to quadrantize on Scatha using videos from Overseer\F:\Videos\BB##\Previous Experiments\Experiment05\Cohort01
-experimentToQuadrantize = '05';
-cohortToQuadrantize = '01';
-pathToOverseerFBBFolders = '/media/OverseerF:/Videos';
+if ~exist('experimentToQuadrantize','var')
+    experimentToQuadrantize = '05';%set default if not found as input
+end
+if ~exist('cohortToQuadrantize','var')
+    cohortToQuadrantize = '01';%set default if not found as input
+end
+if ~exist('pathToFBBFolders','var')
+    pathToFBBFolders = '/media/OverseerF:/Videos';%set default if not found as input
+end
 %% Which Experiment and Cohort to analyze. 
 experimentAndCohortToAnalyze = sprintf('Experiment%s/Cohort%s', experimentToQuadrantize, cohortToQuadrantize);
 %% loading videos
 
-load('FoundVideoFiles.mat', 'all_videos_output_data')
-load('FoundVideoFiles.mat', 'bbIDs')
+% load('FoundVideoFiles.mat', 'all_videos_output_data')
+% load('FoundVideoFiles.mat', 'bbIDs')
+% [all_videos_output_data,bbIDs] = XXX;
+
 num_boxes=size(bbIDs,2);
 
 for k=1:num_boxes
@@ -23,7 +31,7 @@ for k=1:num_boxes
 	box_folder=sprintf('BB%s',box_number);
 	formatSpec='%s\\PreviousExperiments';
 	box_folder=sprintf(formatSpec,box_folder);
-	addpath(pathTo, box_folder);
+	addpath(pathToBBFolders, box_folder);
 	vid_data=all_videos_output_data{1,k}.videoFilesData;
 	vid_data=struct2table(vid_data);
 	% vid_dir=vid_data.folder{1,1}

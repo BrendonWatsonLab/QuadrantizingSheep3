@@ -10,12 +10,14 @@ function requadrantize()
 experimentToQuadrantize = '05';
 cohortToQuadrantize = '01';
 pathToOverseerFBBFolders = '/media/OverseerF:/Videos';
-%%
-experimentAndCohortToAnalyze = sprintf('Experiment%s, ');
+%% Which Experiment and Cohort to analyze. 
+experimentAndCohortToAnalyze = sprintf('Experiment%s/Cohort%s', experimentToQuadrantize, cohortToQuadrantize);
 %% loading videos
 
-load('FoundVideoFiles.mat', 'all_videos_output_data')
-load('FoundVideoFiles.mat', 'bbIDs')
+% load('FoundVideoFiles.mat', 'all_videos_output_data')
+% load('FoundVideoFiles.mat', 'bbIDs')
+[all_videos_output_data,bbIDs] = XXX;
+
 num_boxes=size(bbIDs,2);
 
 for k=1:num_boxes
